@@ -1,0 +1,25 @@
+SEARXNG_CONFIG="/usr/local/etc/searxng.yml"
+
+put()
+{
+	local out errlevel
+
+	out=`dasel put -f "${SEARXNG_CONFIG}" -r yaml "$@" 2>&1`
+
+	errlevel=$?
+
+	if [ ${errlevel} -ne 0 ]; then
+		err "${out}"
+		exit ${errlevel}
+	fi
+}
+
+err()
+{
+	echo "###> $* <###"
+}
+
+info()
+{
+	echo "======> $* <======"
+}
