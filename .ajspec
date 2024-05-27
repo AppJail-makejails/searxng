@@ -1,0 +1,16 @@
+tags: 13.3
+13.3.arch: amd64
+13.3.name: "searxng"
+13.3.timestamp.amd64: 1716794477
+13.3.sum.amd64: 2834568e324e24ceb39cf3ceae59e4151298292e753c6fa43e14300d32230ee4
+13.3.size.amd64: 92070657
+13.3.source.amd64: "http://appjail.hpc.at/searxng/13.3-amd64-image.appjail"
+13.3.source.amd64+: "https://images.all101bsd.download/searxng/13.3-amd64-image.appjail"
+tags+: 14.0
+14.0.arch: amd64
+14.0.name: "searxng"
+14.0.timestamp.amd64: 1716794570
+14.0.sum.amd64: 58f95b817a85b6c03961b6c4c9cc939f3866c36399e8ce7cf6d006c29fb9544b
+14.0.size.amd64: 91284336
+14.0.source.amd64: "http://appjail.hpc.at/searxng/14.0-amd64-image.appjail"
+14.0.source.amd64+: "https://images.all101bsd.download/searxng/14.0-amd64-image.appjail"
