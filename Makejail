@@ -8,7 +8,7 @@ FROM --entrypoint gh+AppJail-makejails/searxng searxng:${searxng_tag}
 CMD echo "======> Configuring ... <======"
 
 RAW if [ ! -f "${searxng_conf}" ]; then
-    CMD echo "###> '${searxng_conf}' cannot find SearxNG configuration file. <###"
+    CMD echo "###> '${searxng_conf}' cannot find SearXNG configuration file. <###"
     RAW exit 1
 RAW fi
 
