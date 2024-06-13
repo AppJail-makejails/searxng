@@ -1,3 +1,3 @@
 INCLUDE options/options.makejail
 
-PKG py39-searxng-devel
+PKG py311-searxng-devel
