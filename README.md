@@ -35,7 +35,7 @@ services:
       - expose: '8888'
     environment:
       - SEARXNG_SECRET: 'mysupersecret123'
-      - SEARXNG_REDIS_URL: 'redis://redis:6379/0'
+      - SEARXNG_REDIS_URL: 'redis://searxng-redis:6379/0'
   cache:
     name: searxng-redis
     makejail: gh+AppJail-makejails/redis
