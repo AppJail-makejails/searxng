@@ -57,7 +57,7 @@ DIRECTOR_PROJECT=searxng
 
 * `SEARXNG_DEBUG` (optional): Allow a more detailed log if you run SearXNG directly. Display detailed error messages in the browser too, so this must be deactivated in production.
 * `SEARXNG_PORT` (optional): Port name.
-* `SEARXNG_BIND_ADDRESS` (optional): Bind address of the SearXNG web application.
+* `SEARXNG_BIND_ADDRESS` (optional): Specifies the source port SearxNG should use.
 * `SEARXNG_SECRET` (optional): Used for cryptography purpose.
 * `SEARXNG_BASE_URL` (optional): The base URL where SearXNG is deployed. Used to create correct inbound links.
 * `SEARXNG_REDIS_URL` (optional): URL to connect redis database.
