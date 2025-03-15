@@ -2,7 +2,7 @@ INCLUDE options/options.makejail
 
 ARG searxng_conf=files/searxng.yml
 ARG searxng_ajspec=gh+AppJail-makejails/searxng
-ARG searxng_tag=13.4
+ARG searxng_tag=13.5
 
 FROM --entrypoint "${searxng_ajspec}" searxng:${searxng_tag}
 
