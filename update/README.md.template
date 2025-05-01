@@ -4,7 +4,7 @@ SearXNG is a free internet metasearch engine which aggregates results from more 
 
 docs.searxng.org
 
-![searxng logo](https://raw.githubusercontent.com/searxng/searxng/master/src/brand/searxng.svg)
+![searxng logo](https://upload.wikimedia.org/wikipedia/en/thumb/a/a3/SearXNG_logo.svg/2560px-SearXNG_logo.svg.png)
 
 ## How to use this Makejail
 
