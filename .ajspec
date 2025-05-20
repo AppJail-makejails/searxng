@@ -1,16 +1,17 @@
 tags+: 13.5
 13.5.arch: amd64
 13.5.name: "searxng"
-13.5.timestamp.amd64: 1745958598
-13.5.sum.amd64: 5d12afd02e0ba8a2bf1f90a76f830f1f681caa177979a8c3c3d6af54ee8fce58
-13.5.size.amd64: 106180662
+13.5.timestamp.amd64: 1747773865
+13.5.sum.amd64: e26c3caf59d157deee71adc2f24ce373636a1f264bcda22777f3fa0656b78ef5
+13.5.size.amd64: 106445835
 13.5.source.amd64: "https://images.all101bsd.download/searxng/13.5-amd64-image.appjail"
 13.5.source.amd64+: "http://appjail.hpc.at/searxng/13.5-amd64-image.appjail"
 tags+: 14.2
 14.2.arch: amd64
 14.2.name: "searxng"
-14.2.timestamp.amd64: 1745958683
-14.2.sum.amd64: a08bf8d1dd74a5de616513788f23a5448b491cadbf536ee09e9725a73d91aa4f
-14.2.size.amd64: 105736643
+14.2.timestamp.amd64: 1747774053
+14.2.sum.amd64: 64c960e7480812e9f3ac0d9c7ac084464b46bfd69b3efd778c4ca14902e23a00
+14.2.size.amd64: 105975772
 14.2.source.amd64: "https://images.all101bsd.download/searxng/14.2-amd64-image.appjail"
 14.2.source.amd64+: "http://appjail.hpc.at/searxng/14.2-amd64-image.appjail"
+maintenance: "This image is uploading, please wait a moment and try again. If you are importing this image using a Makejail that has the '--<name>_ajspec' argument, you can use the 'reproduce' method to use 'appjail-reproduce'. See 'appjail-image(5)' for details."
