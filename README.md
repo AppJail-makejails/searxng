@@ -15,10 +15,17 @@ $ appjail oci run -Pd \
     -o overwrite=force \
     -o virtualnet=":<random> default" \
     -o nat \
+    -o expose=8080 \
     -o fstab="/var/appjail-volumes/searxng/cache /var/cache/searxng" \
     -o fstab="/var/appjail-volumes/searxng/config /usr/local/etc/searxng" \
     ghcr.io/appjail-makejails/searxng searxng
+...
+$ appjail jail list -j searxng name network_ip4
+NAME     NETWORK_IP4
+searxng  10.0.0.8
 ```
+
+Then you can hit `http://10.0.0.8:8080` (or `http://searxng:8080` if you've configured [DNS in AppJail](https://appjail.readthedocs.io/en/latest/networking/DNS/)) or `http://host-ip:8080` in your browser (and from an external host).
 
 The following environment variables can be configured:
 
@@ -34,6 +41,13 @@ The following environment variables can be configured:
 
 * `PGID` (default: `1000`): Equivalent to `PUID` but for the Process Group ID.
 * `PUID` (default: `1000`): Process User ID for the container's main process, allowing you to match the owner of files written to mounted host volumes to your host system's user. Writable volumes are changed based on this environment variable.
+
+### Volumes
+
+| Name | Owner | Group | Perm | Type | Mountpoint |
+| --- | --- | --- | --- | --- | --- |
+| appjail-76ed6cdd7a-usr_local_etc_searxng | `${PUID}` | `${PGID}` | - | - | /usr/local/etc/searxng |
+| appjail-bc3a28353e-var_cache_searxng | `${PUID}` | `${PGID}` | - | - | /var/cache/searxng |
 
 ## OCI Configuration
 
