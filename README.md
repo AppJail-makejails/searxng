@@ -1,70 +1,52 @@
-# SearXNG
+# SearxNG
 
 SearXNG is a free internet metasearch engine which aggregates results from more than 70 search services. Users are neither tracked nor profiled. Additionally, SearXNG can be used over Tor for online anonymity.
 
-docs.searxng.org
+wikipedia.org/wiki/SearXNG
 
-![searxng logo](https://upload.wikimedia.org/wikipedia/en/thumb/a/a3/SearXNG_logo.svg/2560px-SearXNG_logo.svg.png)
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a3/SearXNG_logo.svg/1280px-SearXNG_logo.svg.png" width="30%" height="auto" alt="SearxNG logo">
 
 ## How to use this Makejail
 
-### Standalone
-
-```sh
-appjail makejail \
-    -j searxng \
-    -f gh+AppJail-makejails/searxng \
+```console
+$ mkdir -p /var/appjail-volumes/searxng/cache
+$ mkdir -p /var/appjail-volumes/searxng/config
+$ appjail oci run -Pd \
+    -o overwrite=force \
     -o virtualnet=":<random> default" \
-    -o nat
+    -o nat \
+    -o fstab="/var/appjail-volumes/searxng/cache /var/cache/searxng" \
+    -o fstab="/var/appjail-volumes/searxng/config /usr/local/etc/searxng" \
+    ghcr.io/appjail-makejails/searxng searxng
 ```
 
-### Deploy using appjail-director
+The following environment variables can be configured:
 
-**appjail-director.yml**:
+* `$SEARXNG_*`: Controls the SearXNG configuration options, look out for environment `$SEARXNG_*` in [server:](https://docs.searxng.org/admin/settings/settings_server.html#settings-server) and [general:](https://docs.searxng.org/admin/settings/settings_general.html#settings-general).
+* `$GRANIAN_*`: Controls the [Granian server options](https://docs.searxng.org/admin/installation-granian.html#granian-configuration).
+
+### Arguments (stage: build)
+
+* `searxng_from` (default: `ghcr.io/appjail-makejails/searxng`): Location of OCI image. See also [OCI Configuration](#oci-configuration).
+* `searxng_tag` (default: `latest`): OCI image tag. See also [OCI Configuration](#oci-configuration).
+
+### Environment (OCI image)
+
+* `PGID` (default: `1000`): Equivalent to `PUID` but for the Process Group ID.
+* `PUID` (default: `1000`): Process User ID for the container's main process, allowing you to match the owner of files written to mounted host volumes to your host system's user. Writable volumes are changed based on this environment variable.
+
+## OCI Configuration
 
 ```yaml
-options:
-  - virtualnet: ':<random> default'
-  - nat:
-
-services:
-  metasearch:
-    name: searxng
-    makejail: gh+AppJail-makejails/searxng
-    options:
-      - expose: '8888'
-    environment:
-      - SEARXNG_SECRET: 'mysupersecret123'
-      - SEARXNG_REDIS_URL: 'redis://searxng-redis:6379/0'
-  cache:
-    name: searxng-redis
-    makejail: gh+AppJail-makejails/redis
+build:
+  variants:
+    - tag: 15.1
+      containerfile: Containerfile
+      aliases: ["latest"]
+      default: true
+      args:
+        FREEBSD_RELEASE: "15.1"
+        PYVER: "312"
+        NO_PKGCLEAN: "1"
+      cache_dirs: ["pkgcache0:/var/cache/pkg"]
 ```
-
-**.env**:
-
-```
-DIRECTOR_PROJECT=searxng
-```
-
-### Arguments:
-
-* `searxng_tag` (default: `14.3`): See [#tags](#tags).
-* `searxng_ajspec` (default: `gh+AppJail-makejails/searxng`): Entry point where the `appjail-ajspec(5)` file is located.
-* `searxng_conf` (default: `files/searxng.yml`): Configuration file.
-
-### Environment:
-
-* `SEARXNG_DEBUG` (optional): Allow a more detailed log if you run SearXNG directly. Display detailed error messages in the browser too, so this must be deactivated in production.
-* `SEARXNG_PORT` (optional): Specifies the source port SearxNG should use.
-* `SEARXNG_BIND_ADDRESS` (optional): Bind address of the SearXNG web application.
-* `SEARXNG_SECRET` (optional): Used for cryptography purpose.
-* `SEARXNG_BASE_URL` (optional): The base URL where SearXNG is deployed. Used to create correct inbound links.
-* `SEARXNG_REDIS_URL` (optional): URL to connect redis database.
-
-## Tag
-
-| Tag    | Arch    | Version        | Type   |
-| ------ | ------- | -------------- | ------ |
-| `14.3` | `amd64` | `14.3-RELEASE` | `thin` |
-| `15` | `amd64` | `15` | `thin` |

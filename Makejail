@@ -1,32 +1,5 @@
-INCLUDE options/options.makejail
+ARG searxng_from=ghcr.io/appjail-makejails/searxng
+ARG searxng_tag=latest
 
-ARG searxng_conf=files/searxng.yml
-ARG searxng_ajspec=gh+AppJail-makejails/searxng
-ARG searxng_tag=14.3
-
-FROM --entrypoint "${searxng_ajspec}" searxng:${searxng_tag}
-
-CMD echo "======> Configuring ... <======"
-
-RAW if [ ! -f "${searxng_conf}" ]; then
-    CMD echo "###> '${searxng_conf}' cannot find SearXNG configuration file. <###"
-    RAW exit 1
-RAW fi
-
-COPY --verbose ${searxng_conf} /usr/local/etc/searxng.yml
-CMD chown root:wheel /usr/local/etc/searxng.yml
-CMD chmod 644 /usr/local/etc/searxng.yml
-
-CMD echo "======> Installing scripts ... <======"
-COPY --verbose scripts
-WORKDIR /scripts
-RUN /scripts/configure-searxng.sh
-
-CMD echo "======> Uninstalling scripts ... <======"
-CMD rm -rf /scripts
-
-CMD echo "======> Enabling searxng ... <======"
-SYSRC searxng_enable=YES
-
-CMD echo "======> Starting searxng ... <======"
-SERVICE searxng start
+OPTION overwrite=force
+OPTION from=${searxng_from}:${searxng_tag}
