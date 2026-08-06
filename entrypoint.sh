@@ -15,7 +15,7 @@ if [ ! -s "${__SEARXNG_CONFIG_PATH}/settings.yml" ]; then
         "${__SEARXNG_CONFIG_PATH}/settings.yml"
 fi
 
-chown -R noroot:noroot "${__SEARXNG_CONFIG_PATH}" "${__SEARXNG_DATA_PATH}"
+change_owner "${__SEARXNG_CONFIG_PATH}" "${__SEARXNG_DATA_PATH}"
 
 # ENVs aliases. Just for compatibility with upstream.
 # See also: https://github.com/searxng/searxng/issues/5934
